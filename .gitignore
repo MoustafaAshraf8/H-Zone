@@ -4,7 +4,7 @@ package-lock.json
 package.json
 Pgdatabase.js
 /bin/*
-/public/*
+
 /routes/*
 /views/*
 /app.js

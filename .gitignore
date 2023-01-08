@@ -3,8 +3,3 @@ node_modules
 package-lock.json
 package.json
 Pgdatabase.js
-/bin/*
-
-/routes/*
-
-/app.js

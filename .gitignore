@@ -6,5 +6,5 @@ Pgdatabase.js
 /bin/*
 
 /routes/*
-/views/*
+
 /app.js

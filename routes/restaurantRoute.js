@@ -72,4 +72,52 @@ restaurantRouter
     res.setHeader("Content-Type", "application/json");
     res.send("user delete");
   });
+
+//__________________________________________________________________________________________________________________________________
+
+restaurantRouter
+  .route("/:restName")
+  .get((req, res, next) => {
+    const pool = new Pool({
+      host: process.env.POSTGRESS_HOST,
+      user: process.env.POSTGRESS_USER,
+      port: process.env.POSTGRESS_PORT,
+      password: process.env.POSTGRESS_PASSWORD,
+      database: process.env.POSTGRESS_DATABASE,
+    });
+
+    var restName = req.params.restName.toLowerCase();
+    console.log("11111111111111111", restName);
+    var query = `select rest.restname as RestName, rest.restspecialization as special, rest.restlogo as logo, rest.restmenu as menu, meal.mealname as name, meal.mealprice as price, meal.mealpriceafter as priceafter, meal.mealoffer as offer, meal.mealdescription as description
+    from Restaurant as rest, restMeal as meal
+    where rest.restName = '${restName}' AND meal.restName = '${restName}';`;
+    pool
+      .query(query)
+      .then((result) => {
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+        res.json(result.rows);
+      })
+      .catch((err) => {
+        res.statusCode = 404;
+        res.send("55555555555555");
+      });
+  })
+
+  .post((req, res, next) => {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.send("user post");
+  })
+  .put((req, res, next) => {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.send("user put");
+  })
+  .delete((req, res, next) => {
+    res.statusCode = 200;
+    res.setHeader("Content-Type", "application/json");
+    res.send("user delete");
+  });
+
 module.exports = restaurantRouter;

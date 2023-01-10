@@ -18,10 +18,10 @@ HomePage.route("/").get((req, res, next) => {
   });
 
   if (!req.query.sort) {
-    var query = `select restname as name, restspecialization as special, restlogo as logo, restmenu as menu from restaurant;`;
+    var query = `select restname as name, restspecialization as special, restlogo as logo, restmenu as menu from restaurant limit 10;`;
   } else {
     var sort = req.query.sort;
-    var query = `select restname as name, restspecialization as special, restlogo as logo, restmenu as menu from restaurant where restspecialization = '${sort}';`;
+    var query = `select restname as name, restspecialization as special, restlogo as logo, restmenu as menu from restaurant where restspecialization = '${sort}' limit 10;`;
   }
 
   pool

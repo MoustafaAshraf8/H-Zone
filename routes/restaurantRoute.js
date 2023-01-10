@@ -18,8 +18,16 @@ restaurantRouter
       password: process.env.POSTGRESS_PASSWORD,
       database: process.env.POSTGRESS_DATABASE,
     });
+
+    if (!req.query.sort) {
+      var query = `select restname as name, restspecialization as special, restlogo as logo, restmenu as menu from restaurant;`;
+    } else {
+      var sort = req.query.sort;
+      var query = `select restname as name, restspecialization as special, restlogo as logo, restmenu as menu from restaurant where restspecialization = '${sort}';`;
+    }
+
     pool
-      .query("SELECT * FROM emp")
+      .query(query)
       .then((result) => {
         res.statusCode = 200;
         res.setHeader("Content-Type", "application/json");
@@ -27,7 +35,7 @@ restaurantRouter
       })
       .catch((err) => {
         res.statusCode = 404;
-        res.send("error, user not found");
+        res.send(err);
       });
   })
 
@@ -64,5 +72,4 @@ restaurantRouter
     res.setHeader("Content-Type", "application/json");
     res.send("user delete");
   });
-
 module.exports = restaurantRouter;

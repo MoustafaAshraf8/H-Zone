@@ -1,5 +1,10 @@
 .env
+/migrations
+/sql
+dependencies.pdf
 node_modules
 package-lock.json
 package.json
 Pgdatabase.js
+testReadme.md
+database.json

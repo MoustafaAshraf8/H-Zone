@@ -1,14 +1,14 @@
 var express = require("express");
 var bodyparser = require("body-parser");
-var userRouter = express.Router();
+var restaurantRouter = express.Router();
 
 require("dotenv").config();
-userRouter.use(bodyparser.json());
+restaurantRouter.use(bodyparser.json());
 
 const { Pool } = require("pg");
 
 //-------------------------------------------------------------------------------
-userRouter
+restaurantRouter
   .route("/")
   .get((req, res, next) => {
     const pool = new Pool({
@@ -65,4 +65,4 @@ userRouter
     res.send("user delete");
   });
 
-module.exports = userRouter;
+module.exports = restaurantRouter;
